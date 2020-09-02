@@ -1,0 +1,16 @@
+.footer {
+
+    &__link {
+        display: flex;
+        align-items: center;
+        flex-flow: row nowrap;
+        justify-content: center;
+        width: 4rem;
+        height: 4rem;
+        color: $middle-grey;
+        font-size: 2rem;
+        font-weight: 700;
+        border-radius: 50%;
+        box-shadow: $neo-base;
+    }
+}

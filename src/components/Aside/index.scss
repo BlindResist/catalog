@@ -1,0 +1,16 @@
+.aside {
+    display: flex;
+    align-items: flex-start;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    width: 6rem;
+    overflow: hidden;
+    padding: 1rem;
+    position: fixed;
+    top: 2rem;
+    left: 0;
+    z-index: 100;
+    border-radius: 0 3rem 3rem 0;
+    background-color: $purple-lite;
+    box-shadow: $neo-base;
+}

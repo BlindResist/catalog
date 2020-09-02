@@ -1,0 +1,24 @@
+/* colors */
+$white: #fff;
+$red: #ed174b;
+$black: #212121;
+$dark-grey: #2d2d2d;
+$lite-grey: #f1f1f1;
+$blue-dark: #001f3f;
+$middle-grey: #9aa8b7;
+$purple-lite: #d3dfee;
+$neo-color-1: #b3beca;
+$neo-color-2: #f3ffff;
+
+/* breakpoints */
+$breakpoint-default: 1600px;
+$breakpoint-desktop: 1240px;
+$breakpoint-tablet: 1024px;
+$breakpoint-mobile: 768px;
+$breakpoint-v-mobile: 480px;
+
+/* timing */
+$duration-base: .3s;
+
+/* templates */
+$neo-base: 1rem 1rem 3.5rem $neo-color-1, -1rem -1rem 3.5rem $neo-color-2;

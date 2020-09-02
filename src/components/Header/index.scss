@@ -1,0 +1,20 @@
+.header {
+
+    &__logo {
+        display: flex;
+        align-items: center;
+        flex-flow: row nowrap;
+        justify-content: center;
+        width: 4rem;
+        height: 4rem;
+        color: $middle-grey;
+        font-size: 2rem;
+        font-weight: 700;
+        border-radius: 50%;
+        background-size: 40%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-image: url('../../images/lnk-logo.svg');
+        box-shadow: $neo-base;
+    }
+}

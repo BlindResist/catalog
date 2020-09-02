@@ -1,0 +1,26 @@
+.card {
+    overflow: hidden;
+    border-radius: 1rem;
+    background-color: $purple-lite;
+    box-shadow: $neo-base;
+
+    &__image {
+        height: 18rem;
+    }
+
+    &__body {
+        padding: 2rem;
+    }
+
+    &__desc {
+        margin: 1.5rem 0;
+    }
+
+    &__price {
+        text-align: right;
+
+        &-value {
+            margin-right: .5rem;
+        }
+    }
+}

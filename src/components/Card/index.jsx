@@ -25,8 +25,13 @@ class Card extends Component {
                     >{ data.name }</Link>
                     <p className = 'card__desc'>{ data.desc }</p>
                     <div className = 'card__price'>
-                        <span className = 'card__price-value'>{ data.price.value }</span>
-                        <span className = 'card__price-currency'>{ data.price.currency }</span>
+                        <span>Price:</span>
+                        <span className = 'card__price-value'>{
+                            parseInt(data.price.value).toLocaleString()
+                        }</span>
+                        <span className = {
+                            'card__price-value card__price-value--' + data.price.currency
+                        }></span>
                     </div>
                 </div>
             </div>

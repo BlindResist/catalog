@@ -7,7 +7,9 @@ class Filters extends Component {
 
     template() {
         return (
-            <section className = 'filters'></section>
+            <section className = 'filters'>
+                { this.props.children }
+            </section>
         )
     }
 

@@ -4,9 +4,17 @@ import React, { Component } from 'react'
 import './index.scss'
 
 class Select extends Component {
-    state = {
-        opened: false,
-        selected: this.props.selected || ''
+    constructor(props) {
+        super(props)
+        this.select = React.createRef()
+        this.state = {
+            opened: false,
+            value: this.props.selected || ''
+        }
+    }
+
+    componentDidMount() {
+        document.addEventListener('click', event => this.clickOutside(event))
     }
 
     toggleDropdown = () => {
@@ -23,29 +31,41 @@ class Select extends Component {
 
     selectOption = option => () => {
         this.closeDropdown()
-        this.setState({
-            selected: option
-        })
+        this.update(option)
     }
 
     clearSelected = event => {
         event.stopPropagation()
 
         this.closeDropdown()
+        this.update()
+    }
+
+    clickOutside = event => {
+        let condition = this.state.opened && !this.select.current.contains(event.target)
+
+        if (condition) this.closeDropdown()
+    }
+
+    update = (value = '') => {
+        this.props.sendData({
+            value: value,
+            name: this.props.name
+        })
         this.setState({
-            selected: ''
+            value: value
         })
     }
 
     result() {
-        if (this.state.selected.length) {
-            return <span className = 'select__selected'>{ this.state.selected }</span>
+        if (this.state.value.length) {
+            return <span className = 'select__selected'>{ this.state.value }</span>
         } else {
             return <span className = 'select__placeholder'>{ this.props.placeholder }</span>
         }
     }
 
-    template() {
+    render() {
         const options = this.props.options.map(option => {
             return (
                 <li
@@ -57,15 +77,20 @@ class Select extends Component {
         })
 
         return (
-            <div className = {
-                'select' + (this.state.opened ? ' is-opened' : '')
-            }>
+            <div
+                ref = { this.select }
+                name = { this.props.name }
+                className = {
+                    'select' + (this.state.opened ? ' is-opened' : '')
+                }
+            >
                 <div
                     className = 'select__container'
                     onClick = { this.toggleDropdown }
                 >
                     { this.result() }
-                    { this.state.selected.length > 0 &&
+                    {
+                        this.state.value.length > 0 &&
                         <span
                             className = 'select__clear'
                             onClick = { this.clearSelected }
@@ -73,7 +98,8 @@ class Select extends Component {
                     }
                     <span className = 'select__arrow'></span>
                 </div>
-                { this.state.opened &&
+                {
+                    this.state.opened &&
                     <div className = 'select__dropdown'>
                         <ul className = 'select__options'>
                             { options }
@@ -82,10 +108,6 @@ class Select extends Component {
                 }
             </div>
         )
-    }
-
-    render() {
-        return this.template()
     }
 }
 

@@ -6,8 +6,8 @@ import './index.scss'
 
 class Card extends Component {
 
-    template() {
-        const data = this.props.data
+	render() {
+		const data = this.props.data
 
         return (
             <div className = 'card'>
@@ -36,10 +36,6 @@ class Card extends Component {
                 </div>
             </div>
         )
-    }
-
-	render() {
-		return this.template()
 	}
 }
 

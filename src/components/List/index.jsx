@@ -12,8 +12,8 @@ class List extends Component {
         return `col-default-${colWidth}`
     }
 
-    template() {
-        const items = this.props.children.map(item => {
+	render() {
+		const items = this.props.children.map(item => {
             return (
                 <div
                     key = { item.key }
@@ -27,10 +27,6 @@ class List extends Component {
                 <div className = 'row'>{ items }</div>
             </section>
         )
-    }
-
-	render() {
-		return this.template()
 	}
 }
 

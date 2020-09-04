@@ -6,8 +6,8 @@ import './index.scss'
 
 class Footer extends Component {
 
-    template() {
-        return (
+	render() {
+		return (
             <footer className = 'footer'>
                 <Link
                     link = '/'
@@ -15,10 +15,6 @@ class Footer extends Component {
                 />
             </footer>
         )
-    }
-
-	render() {
-		return this.template()
 	}
 }
 

@@ -8,17 +8,20 @@ class Input extends Component {
         value: this.props.value || ''
     }
 
-    onChange = event => {
-        this.setState({
-            value: event.target.value
-        })
-    }
+    changeValue = event => this.update(event.target.value)
 
     clearValue = event => {
         event.stopPropagation()
+        this.update()
+    }
 
+    update = (value = '') => {
+        this.props.sendData({
+            value: value,
+            name: this.props.name
+        })
         this.setState({
-            value: ''
+            value: value
         })
     }
 
@@ -38,7 +41,7 @@ class Input extends Component {
                     name = { this.props.name }
                     type = { this.props.type }
                     value = { this.state.value }
-                    onChange = { this.onChange }
+                    onChange = { this.changeValue }
                 />
                 { this.state.value.length < 1 &&
                     <span className = 'input__placeholder'>{ this.props.placeholder }</span>

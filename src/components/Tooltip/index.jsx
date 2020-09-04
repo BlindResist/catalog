@@ -5,7 +5,7 @@ import './index.scss'
 
 class Tooltip extends Component {
 
-    template() {
+    render() {
         return (
             <span className = 'tooltip'>
                 <span className = 'tooltip__text'>
@@ -16,10 +16,6 @@ class Tooltip extends Component {
                 </span>
             </span>
         )
-    }
-
-    render() {
-        return this.template()
     }
 }
 

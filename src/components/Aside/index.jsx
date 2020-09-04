@@ -8,7 +8,7 @@ import './index.scss'
 
 class Aside extends Component {
 
-    template() {
+    render() {
         return (
             <aside className = 'aside'>
                 <Header
@@ -22,10 +22,6 @@ class Aside extends Component {
                 />
             </aside>
         )
-    }
-
-    render() {
-        return this.template()
     }
 }
 

@@ -2,4 +2,18 @@
     min-height: 10rem;
     padding: 0 1rem;
     border-radius: 1rem;
+
+    &__item {
+
+        &--row {
+            display: flex;
+            align-items: center;
+            flex-flow: row nowrap;
+            justify-content: flex-start;
+
+            .filters__caption {
+                margin-left: 1rem;
+            }
+        }
+    }
 }

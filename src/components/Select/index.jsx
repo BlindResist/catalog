@@ -8,37 +8,47 @@ class Select extends Component {
         super(props)
         this.select = React.createRef()
         this.state = {
+            id: '',
+            name: '',
             opened: false,
+            options: this.props.options,
             value: this.props.selected || ''
         }
     }
 
-    componentDidMount() {
+    componentDidMount = () => {
         document.addEventListener('click', event => this.clickOutside(event))
     }
 
+    buildOptionClass = option => {
+        let className = 'select__option'
+
+        if (option.selected) {
+            className += ' is-selected'
+        } else if (option.disabled) {
+            className += ' is-disabled'
+        }
+
+        return className
+    }
+
     toggleDropdown = () => {
-        this.setState({
-            opened: !this.state.opened
-        })
+        this.setState({ opened: !this.state.opened })
     }
 
     closeDropdown = () => {
-        this.setState({
-            opened: false
-        })
+        this.setState({ opened: false })
     }
 
-    selectOption = option => () => {
+    selectOption = data => () => {
         this.closeDropdown()
-        this.update(option)
+        this.update(data)
     }
 
     clearSelected = event => {
         event.stopPropagation()
-
         this.closeDropdown()
-        this.update()
+        this.update({ id: '', name: '' })
     }
 
     clickOutside = event => {
@@ -47,31 +57,24 @@ class Select extends Component {
         if (condition) this.closeDropdown()
     }
 
-    update = (value = '') => {
-        this.props.sendData({
-            value: value,
+    update = data => {
+        let dataObject = {
+            id: data.id,
+            value: data.name,
             name: this.props.name
-        })
-        this.setState({
-            value: value
-        })
-    }
-
-    result() {
-        if (this.state.value.length) {
-            return <span className = 'select__selected'>{ this.state.value }</span>
-        } else {
-            return <span className = 'select__placeholder'>{ this.props.placeholder }</span>
         }
+
+        this.setState(dataObject)
+        this.props.sendData(dataObject)
     }
 
     render() {
-        const options = this.props.options.map(option => {
+        const options = this.state.options.map(option => {
             return (
                 <li
                     key = { option.id }
-                    className = 'select__option'
-                    onClick = { this.selectOption(option.name) }
+                    onClick = { this.selectOption(option) }
+                    className = { this.buildOptionClass(option) }
                 >{ option.name }</li>
             )
         })
@@ -80,15 +83,20 @@ class Select extends Component {
             <div
                 ref = { this.select }
                 name = { this.props.name }
-                className = {
-                    'select' + (this.state.opened ? ' is-opened' : '')
-                }
+                className = { 'select' + (this.state.opened ? ' is-opened' : '') }
             >
                 <div
                     className = 'select__container'
                     onClick = { this.toggleDropdown }
                 >
-                    { this.result() }
+                    {
+                        this.state.value.length > 0 &&
+                        <span className = 'select__selected'>{ this.state.value }</span>
+                    }
+                    {
+                        this.state.value.length < 1 &&
+                        <span className = 'select__placeholder'>{ this.props.placeholder }</span>
+                    }
                     {
                         this.state.value.length > 0 &&
                         <span
@@ -101,9 +109,7 @@ class Select extends Component {
                 {
                     this.state.opened &&
                     <div className = 'select__dropdown'>
-                        <ul className = 'select__options'>
-                            { options }
-                        </ul>
+                        <ul className = 'select__options'>{ options }</ul>
                     </div>
                 }
             </div>

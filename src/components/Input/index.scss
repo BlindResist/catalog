@@ -82,6 +82,14 @@
         &:after {
             transform: rotate(-45deg);
         }
+
+        &:hover {
+
+            &:before,
+            &:after {
+                opacity: .5;
+            }
+        }
     }
 
     &__error {

@@ -11,7 +11,7 @@ body {
     min-width: 20rem;
     width: 100%;
     color: $middle-grey;
-    text-shadow: 1px 1px rgba(255, 255, 255, .6);
+    text-shadow: 1px 1px rgba($white, .6);
     font-family: 'Roboto Mono', Arial, Helvetica, sans-serif;
     background-color: $black;
 }

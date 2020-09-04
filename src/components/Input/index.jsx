@@ -5,10 +5,13 @@ import './index.scss'
 
 class Input extends Component {
     state = {
+        name: '',
         value: this.props.value || ''
     }
 
-    changeValue = event => this.update(event.target.value)
+    changeValue = event => {
+        this.update(event.target.value)
+    }
 
     clearValue = event => {
         event.stopPropagation()
@@ -16,23 +19,20 @@ class Input extends Component {
     }
 
     update = (value = '') => {
-        this.props.sendData({
+        let dataObject = {
             value: value,
             name: this.props.name
-        })
-        this.setState({
-            value: value
-        })
+        }
+
+        this.setState(dataObject)
+        this.props.sendData(dataObject)
     }
 
     render() {
-
         return (
             <label
                 htmlFor = { this.props.name }
-                className = {
-                    'input' + (this.state.value.length > 0 ? ' is-filled' : '')
-                }
+                className = { 'input' + (this.state.value.length > 0 ? ' is-filled' : '') }
             >
                 <input
                     maxLength = '255'
@@ -43,10 +43,12 @@ class Input extends Component {
                     value = { this.state.value }
                     onChange = { this.changeValue }
                 />
-                { this.state.value.length < 1 &&
+                {
+                    this.state.value.length < 1 &&
                     <span className = 'input__placeholder'>{ this.props.placeholder }</span>
                 }
-                { this.state.value.length > 0 &&
+                {
+                    this.state.value.length > 0 &&
                     <span
                         className = 'input__clear'
                         onClick = { this.clearValue }

@@ -58,6 +58,7 @@
             bottom: 0;
             z-index: 1;
             background-color: $middle-grey;
+            transition: opacity $duration-base;
         }
 
         &:before {
@@ -66,6 +67,14 @@
 
         &:after {
             transform: rotate(-45deg);
+        }
+
+        &:hover {
+
+            &:before,
+            &:after {
+                opacity: .5;
+            }
         }
     }
 
@@ -100,6 +109,7 @@
         padding: 1rem 1.5rem;
         font-size: 1rem;
         line-height: 1.125rem;
+        transition: color $duration-base;
         cursor: pointer;
 
         &:hover {

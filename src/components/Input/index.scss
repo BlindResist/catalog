@@ -14,6 +14,7 @@
     input {
         width: 100%;
         height: 1.5rem;
+        padding: 0;
         color: rgba($blue-dark, .8);
         border: none;
         background: none;
@@ -45,6 +46,7 @@
         white-space: nowrap;
         text-overflow: ellipsis;
         pointer-events: none;
+        user-select: none;
     }
 
     &__clear {
@@ -73,6 +75,7 @@
             bottom: 0;
             z-index: 1;
             background-color: $middle-grey;
+            transition: opacity $duration-base;
         }
 
         &:before {
@@ -102,6 +105,46 @@
         font-size: .65rem;
     }
 
+    &__magnifier {
+        display: block;
+        width: 1.35rem;
+        height: 1.35rem;
+        opacity: .5;
+        margin: auto;
+        position: absolute;
+        top: 0;
+        left: 1.25rem;
+        bottom: 0;
+        z-index: 1;
+        pointer-events: none;
+
+        &:before,
+        &:after {
+            content: '';
+            display: block;
+            position: absolute;
+        }
+
+        &:before {
+            width: 1.125rem;
+            height: 1.125rem;
+            top: 0;
+            left: 0;
+            border: 2px solid $middle-grey;
+            border-radius: 50%;
+        }
+
+        &:after {
+            width: 3px;
+            height: .5rem;
+            top: .875rem;
+            left: 1rem;
+            border-radius: .25rem;
+            background-color: $middle-grey;
+            transform: rotate(-45deg);
+        }
+    }
+
     &.is-error {
         box-shadow: inset 0 0 0 1px $red;
     }
@@ -109,5 +152,13 @@
     &.is-disabled {
         opacity: .8;
         pointer-events: none;
+    }
+
+    &--search {
+        padding-left: 3.5rem;
+
+        .input__placeholder {
+            padding-left: 3.5rem;
+        }
     }
 }

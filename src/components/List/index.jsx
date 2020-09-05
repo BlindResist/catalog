@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 
 class List extends Component {
-    state = {
-        itemsInRow: this.props.itemsInRow || 1
+    constructor(props) {
+        super(props)
+        this.state = {
+            itemsInRow: this.props.itemsInRow || 1
+        }
     }
 
     buildColClass() {

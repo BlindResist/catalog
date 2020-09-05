@@ -2,14 +2,22 @@ import React, { Component } from 'react'
 import Card from '@/components/Card/index.jsx'
 import List from '@/components/List/index.jsx'
 import Filters from '@/components/Filters/index.jsx'
+import NotFound from '@/components/NotFound/index.jsx'
 
 class Goods extends Component {
-    state = {
-        name: '',
-        brand: '',
-        promo: '',
-        items: this.props.data.items,
-        filters: this.props.data.filters
+    constructor(props) {
+        super(props)
+        this.state = {
+            name: '',
+            brand: '',
+            promo: '',
+            country: '',
+            promo: false,
+            itemsInRow: 2,
+            discount: false,
+            items: this.props.data.items,
+            filters: this.props.data.filters
+        }
     }
 
     handleChange = params => {
@@ -33,6 +41,18 @@ class Goods extends Component {
             })
         }
 
+        if (this.state.country !== '') {
+            filtered = filtered.filter(item => item.country === this.state.country)
+        }
+
+        if (this.state.promo !== false) {
+            filtered = filtered.filter(item => item.promo === this.state.promo)
+        }
+
+        if (this.state.discount !== false) {
+            filtered = filtered.filter(item => item.discount === this.state.discount)
+        }
+
         return filtered
     }
 
@@ -51,13 +71,20 @@ class Goods extends Component {
         return (
             <div className = 'goods-list row'>
                 <div className = 'col-default-8'>
-                    <List itemsInRow = '2'>
-                        { this.listItems() }
-                    </List>
+                    {
+                        this.listItems().length < 1 &&
+                        <NotFound />
+                    }
+                    {
+                        this.listItems().length > 0 &&
+                        <List itemsInRow = { this.state.itemsInRow }>
+                            { this.listItems() }
+                        </List>
+                    }
                 </div>
                 <div className = 'col-default-4'>
                     <Filters
-                        data = { this.state.filters }
+                        filters = { this.state.filters }
                         onFilter = { this.handleChange }
                     />
                 </div>

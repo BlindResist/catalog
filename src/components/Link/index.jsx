@@ -4,11 +4,15 @@ import React, { Component } from 'react'
 import './index.scss'
 
 class Link extends Component {
-    state = {
-        link: this.props.link || '/',
-        class: this.props.class || 'link',
-        target: this.props.target || '_self',
-        addClass: `link ${ this.props.addClass }`
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            link: this.props.link || '/',
+            class: this.props.class || 'link',
+            target: this.props.target || '_self',
+            addClass: `link ${ this.props.addClass }`
+        }
     }
 
     className() {

@@ -4,9 +4,36 @@ import React, { Component } from 'react'
 import './index.scss'
 
 class Input extends Component {
-    state = {
-        name: '',
-        value: this.props.value || ''
+    constructor(props) {
+        super(props)
+        this.state = {
+            errorStatus: false,
+            name: this.props.name,
+            errorText: 'required field!',
+            value: this.props.value || '',
+            search: this.props.search || false,
+            placeholder: this.props.placeholder || 'Input text'
+        }
+    }
+
+    componentDidUpdate = prevProps => {
+        if (this.props.value !== prevProps.value) {
+            this.setState({ value: this.props.value })
+        }
+    }
+
+    buildInputClass = () => {
+        let className = 'input'
+
+        if (this.props.search) {
+            className += ' input--search'
+        }
+
+        if (this.state.value.length) {
+            className += ' is-filled'
+        }
+
+        return className
     }
 
     changeValue = event => {
@@ -21,7 +48,7 @@ class Input extends Component {
     update = (value = '') => {
         let dataObject = {
             value: value,
-            name: this.props.name
+            name: this.state.name
         }
 
         this.setState(dataObject)
@@ -32,20 +59,24 @@ class Input extends Component {
         return (
             <label
                 htmlFor = { this.props.name }
-                className = { 'input' + (this.state.value.length > 0 ? ' is-filled' : '') }
+                className = { this.buildInputClass() }
             >
                 <input
                     maxLength = '255'
                     autoComplete = 'off'
-                    id = { this.props.name }
-                    name = { this.props.name }
+                    id = { this.state.name }
+                    name = { this.state.name }
                     type = { this.props.type }
                     value = { this.state.value }
                     onChange = { this.changeValue }
                 />
                 {
+                    this.state.search &&
+                    <span className = 'input__magnifier'></span>
+                }
+                {
                     this.state.value.length < 1 &&
-                    <span className = 'input__placeholder'>{ this.props.placeholder }</span>
+                    <span className = 'input__placeholder'>{ this.state.placeholder }</span>
                 }
                 {
                     this.state.value.length > 0 &&
@@ -54,7 +85,10 @@ class Input extends Component {
                         onClick = { this.clearValue }
                     ></span>
                 }
-                <span className = 'input__error'>{ this.props.error }</span>
+                {
+                    this.state.errorStatus &&
+                    <span className = 'input__error'>{ this.state.errorText }</span>
+                }
             </label>
         )
     }

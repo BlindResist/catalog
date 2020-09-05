@@ -11,7 +11,7 @@ module.exports = {
         filename: 'build.js'
     },
     resolve: {
-        extensions: ['.js', '.json', '.scss'],
+        extensions: ['.js', '.jsx', '.json', '.scss'],
         alias: {
             '@': path.resolve(__dirname, 'src'),
         }

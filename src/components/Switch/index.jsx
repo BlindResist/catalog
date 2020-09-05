@@ -4,14 +4,23 @@ import React, { Component } from 'react'
 import './index.scss'
 
 class Switch extends Component {
-    state = {
-        name: '',
-        checked: this.props.checked || false
+    constructor(props) {
+        super(props)
+        this.state = {
+            name: this.props.name,
+            checked: this.props.checked || false
+        }
+    }
+
+    componentDidUpdate = prevProps => {
+        if (this.props.checked !== prevProps.checked) {
+            this.setState({ checked: this.props.checked })
+        }
     }
 
     toggleSwitch = event => {
         let dataObject = {
-            name: this.props.name,
+            name: this.state.name,
             checked: event.target.checked
         }
 
@@ -22,12 +31,12 @@ class Switch extends Component {
     render() {
         return (
             <label
-                htmlFor = { this.props.name }
+                htmlFor = { this.state.name }
                 className = { 'switch' + (this.state.checked ? ' is-checked' : '') }
             >
                 <input
-                    id = { this.props.name }
-                    name = { this.props.name }
+                    id = { this.state.name }
+                    name = { this.state.name }
                     type = { this.props.type }
                     onChange = { this.toggleSwitch }
                     checked = { this.state.checked }

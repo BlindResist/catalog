@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Input from '@/components/Input/index.jsx'
+import Button from '@/components/Button/index.jsx'
 import Switch from '@/components/Switch/index.jsx'
 import Select from '@/components/Select/index.jsx'
 
@@ -7,64 +8,79 @@ import Select from '@/components/Select/index.jsx'
 import './index.scss'
 
 class Filters extends Component {
-    state = {}
+    constructor(props) {
+        super(props)
+        this.state = {
+            brand: '',
+            country: '',
+            filters: this.props.filters,
+            name: this.props.filters.name.value,
+            promo: this.props.filters.promo.checked,
+            discount: this.props.filters.discount.checked
+        }
+    }
 
     handleSelect = data => {
-        let dataObject = {
+        this.update({
             [data.name]: data.id
-        }
-
-        this.setState(dataObject)
-        this.props.onFilter(dataObject)
+        })
     }
 
     handleInput = data => {
-        let dataObject = {
+        this.update({
             [data.name]: data.value
-        }
-
-        this.setState(dataObject)
-        this.props.onFilter(dataObject)
+        })
     }
 
     handleCheckbox = data => {
-        let dataObject = {
+        this.update({
             [data.name]: data.checked
-        }
+        })
+    }
 
-        this.setState(dataObject)
-        this.props.onFilter(dataObject)
+    handleClear = () => {
+        this.update({
+            name: '',
+            brand: '',
+            country: '',
+            promo: false,
+            discount: false
+        })
+    }
+
+    update = object => {
+        this.setState(object)
+        this.props.onFilter(object)
     }
 
 	render() {
-		const filters = this.props.data
-
         return (
             <section className = 'filters'>
                 <div className = 'row'>
                     <div className = 'col-default-12'>
                         <Input
+                            search
                             type = 'text'
                             name = 'name'
-                            value = { filters.name.value }
                             sendData = { this.handleInput }
-                            placeholder = { filters.name.placeholder }
+                            value = { this.state.name }
+                            placeholder = { this.state.filters.name.placeholder }
                         />
                     </div>
                     <div className = 'col-default-12'>
                         <Select
                             name = 'brand'
                             sendData = { this.handleSelect }
-                            options = { filters.brand.options }
-                            placeholder = { filters.brand.placeholder }
+                            options = { this.state.filters.brand.options }
+                            placeholder = { this.state.filters.brand.placeholder }
                         />
                     </div>
                     <div className = 'col-default-12'>
                         <Select
                             name = 'country'
                             sendData = { this.handleSelect }
-                            options = { filters.country.options }
-                            placeholder = { filters.country.placeholder }
+                            options = { this.state.filters.country.options }
+                            placeholder = { this.state.filters.country.placeholder }
                         />
                     </div>
                     <div className = 'col-default-12'>
@@ -73,7 +89,7 @@ class Filters extends Component {
                                 name = 'promo'
                                 type = 'checkbox'
                                 sendData = { this.handleCheckbox }
-                                checked = { filters.promo.checked }
+                                checked = { this.state.promo }
                             />
                             <span className = 'filters__caption'>Promo offer</span>
                         </div>
@@ -84,10 +100,17 @@ class Filters extends Component {
                                 name = 'discount'
                                 type = 'checkbox'
                                 sendData = { this.handleCheckbox }
-                                checked = { filters.discount.checked }
+                                checked = { this.state.discount }
                             />
                             <span className = 'filters__caption'>Discount</span>
                         </div>
+                    </div>
+                    <div className = 'col-default-12'>
+                        <Button
+                            text = 'Clear'
+                            onClick = { this.handleClear }
+                            addClass = 'button--full-width button--clear'
+                        />
                     </div>
                 </div>
             </section>

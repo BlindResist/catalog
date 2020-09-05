@@ -1,0 +1,15 @@
+.not-found {
+    padding: 2rem 0;
+
+    &__title {
+        margin-bottom: 1.5rem;
+        font-weight: 700;
+        color: $blue-dark;
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+
+    &__text {
+        font-size: 1.125rem;
+    }
+}

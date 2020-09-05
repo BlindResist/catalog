@@ -73,8 +73,9 @@ ul {
 
 #app {
     display: flex;
-    flex-direction: column;
     flex: 1 1 100%;
+    flex-direction: column;
+    width: 100vw;
     overflow: hidden;
     background-color: $purple-lite;
 }

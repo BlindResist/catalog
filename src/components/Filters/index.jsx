@@ -13,6 +13,8 @@ class Filters extends Component {
         this.state = {
             brand: '',
             country: '',
+            brandName: '',
+            countryName: '',
             filters: this.props.filters,
             name: this.props.filters.name.value,
             promo: this.props.filters.promo.checked,
@@ -60,6 +62,7 @@ class Filters extends Component {
                             name = 'brand'
                             sendData = { this.handleChange }
                             selectedOptionId = { this.state.brand }
+                            selectedOptionName = { this.state.brandName }
                             options = { this.state.filters.brand.options }
                             placeholder = { this.state.filters.brand.placeholder }
                         />
@@ -69,6 +72,7 @@ class Filters extends Component {
                             name = 'country'
                             sendData = { this.handleChange }
                             selectedOptionId = { this.state.country }
+                            selectedOptionName = { this.state.countryName }
                             options = { this.state.filters.country.options }
                             placeholder = { this.state.filters.country.placeholder }
                         />

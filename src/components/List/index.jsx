@@ -8,6 +8,12 @@ class List extends Component {
         }
     }
 
+    componentDidUpdate = prevProps => {
+        if (this.props.itemsInRow !== prevProps.itemsInRow) {
+            this.setState({ itemsInRow: this.props.itemsInRow })
+        }
+    }
+
     buildColClass() {
         let itemsInRow = parseInt(this.state.itemsInRow)
         let colWidth = (itemsInRow === 5 || itemsInRow > 6) ? 6 : 12/itemsInRow

@@ -3,6 +3,7 @@ import Card from '@/components/Card/index.jsx'
 import List from '@/components/List/index.jsx'
 import Filters from '@/components/Filters/index.jsx'
 import NotFound from '@/components/NotFound/index.jsx'
+import ToggleView from '@/components/ToggleView/index.jsx'
 
 class Goods extends Component {
     constructor(props) {
@@ -22,6 +23,12 @@ class Goods extends Component {
 
     handleChange = params => {
         this.setState({ ...params })
+    }
+
+    changeView = value => {
+        this.setState({
+            itemsInRow: value
+        })
     }
 
     filteredItems = () => {
@@ -69,24 +76,32 @@ class Goods extends Component {
 
     render() {
         return (
-            <div className = 'goods-list row'>
-                <div className = 'col-default-8'>
-                    {
-                        this.listItems().length < 1 &&
-                        <NotFound />
-                    }
-                    {
-                        this.listItems().length > 0 &&
-                        <List itemsInRow = { this.state.itemsInRow }>
-                            { this.listItems() }
-                        </List>
-                    }
-                </div>
-                <div className = 'col-default-4'>
-                    <Filters
-                        filters = { this.state.filters }
-                        onFilter = { this.handleChange }
-                    />
+            <div className = 'goods-list'>
+
+                <div className = 'row'>
+                    <div className = 'col-default-8'>
+                        <div className = 'row'>
+                            <div className = 'col-default-12'>
+                                <ToggleView sendData = { this.changeView }/>
+                            </div>
+                        </div>
+                        {
+                            this.listItems().length < 1 &&
+                            <NotFound />
+                        }
+                        {
+                            this.listItems().length > 0 &&
+                            <List itemsInRow = { this.state.itemsInRow }>
+                                { this.listItems() }
+                            </List>
+                        }
+                    </div>
+                    <div className = 'col-default-4'>
+                        <Filters
+                            filters = { this.state.filters }
+                            onFilter = { this.handleChange }
+                        />
+                    </div>
                 </div>
             </div>
         )

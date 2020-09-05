@@ -7,6 +7,7 @@ class Button extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            text: this.props.text || '',
             tag: this.props.tag || 'button'
         }
     }
@@ -33,7 +34,10 @@ class Button extends Component {
                 onClick = { this.props.onClick }
                 className = { this.buildButtonCLass() }
             >
-                <span>{ this.props.text }</span>
+                { this.props.children }
+                { this.state.text &&
+                    <span>{ this.props.text }</span>
+                }
             </TagName>
         )
     }

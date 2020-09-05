@@ -11,7 +11,7 @@ class Select extends Component {
             opened: false,
             name: this.props.name,
             options: this.props.options,
-            selectedOptionId: this.props.selectedOptionId,
+            selectedOptionId: this.props.selectedOptionId || '',
             selectedOptionName: this.props.selectedOptionName || '',
             placeholder: this.props.placeholder || 'Choose option'
         }
@@ -23,9 +23,7 @@ class Select extends Component {
 
     componentDidUpdate = prevProps => {
         if (this.props.selectedOptionId === prevProps.selectedOptionId) return
-        if (this.props.selectedOptionId.length < 1) {
-            this.setState({ selectedOptionName: '' })
-        }
+        if (this.props.selectedOptionId.length < 1) this.setState({ selectedOptionName: '' })
         this.setState({ selectedOptionId: this.props.selectedOptionId })
     }
 

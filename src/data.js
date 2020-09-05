@@ -35,7 +35,7 @@ const App = {
                     placeholder: 'Brand',
                     options: [{
                             id: 0,
-                            selected: true,
+                            selected: false,
                             disabled: false,
                             name: 'KitKat'
                         },
@@ -112,7 +112,8 @@ const App = {
                     ]
                 }
             },
-            items: [{
+            items: [
+                {
                     id: 0,
                     brand: 1,
                     country: 2,
@@ -123,7 +124,7 @@ const App = {
                     priceValue: 300,
                     priceCurrency: 'rub',
                     image: './src/images/goods/willies_cacao.jpg',
-                    desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit'
+                    desc: 'Ingredients: grated cocoa, cane sugar, cocoa butter. Total cocoa content not less than 70%'
                 },
                 {
                     id: 1,
@@ -136,7 +137,7 @@ const App = {
                     priceValue: 50,
                     priceCurrency: 'rub',
                     image: './src/images/goods/kitkat_senses.jpg',
-                    desc: 'Lorem ipsum...'
+                    desc: 'Ingredients: grated cocoa, cane sugar, cocoa butter. Total cocoa content not less than 75%'
                 },
                 {
                     id: 2,
@@ -150,7 +151,7 @@ const App = {
                     priceValue: 120,
                     priceCurrency: 'rub',
                     image: './src/images/goods/cachet.jpg',
-                    desc: 'Lorem ipsum...'
+                    desc: 'Ingredients: grated cocoa, cane sugar, cocoa butter. Total cocoa content not less than 70%'
                 },
                 {
                     id: 3,
@@ -163,7 +164,7 @@ const App = {
                     priceValue: 260,
                     priceCurrency: 'rub',
                     image: './src/images/goods/nugali.jpg',
-                    desc: 'Lorem ipsum...'
+                    desc: 'Ingredients: grated cocoa, cane sugar, cocoa butter. Total cocoa content not less than 80%'
                 },
                 {
                     id: 4,
@@ -176,7 +177,7 @@ const App = {
                     priceValue: 140,
                     priceCurrency: 'rub',
                     image: './src/images/goods/lindt.jpg',
-                    desc: 'Lorem ipsum...'
+                    desc: 'Ingredients: grated cocoa, cane sugar, cocoa butter. Total cocoa content not less than 50%'
                 },
                 {
                     id: 5,
@@ -184,13 +185,26 @@ const App = {
                     country: 5,
                     promo: false,
                     discount: true,
-                    discountSize: 30,
+                    discountSize: 25,
                     name: 'BonGenie CHOCOLATE',
                     link: '/',
                     priceValue: 80,
                     priceCurrency: 'rub',
                     image: './src/images/goods/bongenie.jpg',
-                    desc: 'Lorem ipsum...'
+                    desc: 'Ingredients: grated cocoa, cane sugar, cocoa butter. Total cocoa content not less than 70%'
+                },
+                {
+                    id: 6,
+                    brand: 0,
+                    country: 0,
+                    promo: true,
+                    discount: false,
+                    name: 'KitKat Senses Black & White Edition',
+                    link: '/',
+                    priceValue: 100,
+                    priceCurrency: 'rub',
+                    image: './src/images/goods/kitkat_bw.jpg',
+                    desc: 'KitKat® SENSES® Black & White Edition is a new limited edition product from the brands premium line.'
                 }
             ]
         }

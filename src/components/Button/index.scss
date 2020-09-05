@@ -28,4 +28,31 @@
         background-color: $red;
         transition: background-color $duration-base, color $duration-base;
     }
+
+    &--toggle {
+        width: 3rem;
+        height: 3rem;
+        font-weight: 700;
+        border-radius: .75rem;
+        background-size: 40%;
+        background-position: center;
+        background-repeat: no-repeat;
+        transition: box-shadow $duration-base;
+
+        &+& {
+            margin-left: 1rem;
+        }
+
+        &-tile {
+            background-image: url('../../images/layout-tile.svg');
+        }
+
+        &-list {
+            background-image: url('../../images/layout-list.svg');
+        }
+
+        &.is-active {
+            box-shadow: none;
+        }
+    }
 }

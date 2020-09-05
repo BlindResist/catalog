@@ -48,17 +48,18 @@
     }
 
     &__desc {
-        margin: 1.5rem 0;
+        margin: 1.5rem 0 0;
     }
 
     &__price {
-        margin-top: 2rem;
+        padding: 1rem;
+        margin-top: auto;
         text-align: right;
 
         &-value {
             margin-left: .5rem;
             font-weight: 700;
-            font-size: 1.5rem;
+            font-size: 1.75rem;
             color: rgba($blue-dark, .4);
 
             &--rub {
@@ -81,6 +82,42 @@
                     content: '\20AC';
                 }
             }
+        }
+    }
+
+    &__discount {
+        display: block;
+        width: 4rem;
+        height: 4rem;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        text-align: center;
+
+        &:before {
+            content: '';
+            display: block;
+            width: 0;
+            height: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border: 3rem solid transparent;
+            border-top: 3rem solid $red;
+            border-left: 3rem solid $red;
+        }
+
+        span {
+            display: block;
+            position: relative;
+            z-index: 1;
+            color: $white;
+            font-weight: 700;
+            line-height: 4rem;
+            font-size: 1.5rem;
+            text-shadow: none;
+            transform: rotate(-45deg);
         }
     }
 }

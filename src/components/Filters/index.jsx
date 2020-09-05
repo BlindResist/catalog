@@ -20,21 +20,9 @@ class Filters extends Component {
         }
     }
 
-    handleSelect = data => {
+    handleChange = ({ name, value }) => {
         this.update({
-            [data.name]: data.id
-        })
-    }
-
-    handleInput = data => {
-        this.update({
-            [data.name]: data.value
-        })
-    }
-
-    handleCheckbox = data => {
-        this.update({
-            [data.name]: data.checked
+            [name]: value
         })
     }
 
@@ -62,15 +50,16 @@ class Filters extends Component {
                             search
                             type = 'text'
                             name = 'name'
-                            sendData = { this.handleInput }
                             value = { this.state.name }
+                            sendData = { this.handleChange }
                             placeholder = { this.state.filters.name.placeholder }
                         />
                     </div>
                     <div className = 'col-default-12'>
                         <Select
                             name = 'brand'
-                            sendData = { this.handleSelect }
+                            sendData = { this.handleChange }
+                            selectedOptionId = { this.state.brand }
                             options = { this.state.filters.brand.options }
                             placeholder = { this.state.filters.brand.placeholder }
                         />
@@ -78,7 +67,8 @@ class Filters extends Component {
                     <div className = 'col-default-12'>
                         <Select
                             name = 'country'
-                            sendData = { this.handleSelect }
+                            sendData = { this.handleChange }
+                            selectedOptionId = { this.state.country }
                             options = { this.state.filters.country.options }
                             placeholder = { this.state.filters.country.placeholder }
                         />
@@ -86,10 +76,10 @@ class Filters extends Component {
                     <div className = 'col-default-12'>
                         <div className = 'filters__item filters__item--row'>
                             <Switch
-                                name = 'promo'
                                 type = 'checkbox'
-                                sendData = { this.handleCheckbox }
+                                name = 'promo'
                                 checked = { this.state.promo }
+                                sendData = { this.handleChange }
                             />
                             <span className = 'filters__caption'>Promo offer</span>
                         </div>
@@ -97,9 +87,9 @@ class Filters extends Component {
                     <div className = 'col-default-12'>
                         <div className = 'filters__item filters__item--row'>
                             <Switch
-                                name = 'discount'
                                 type = 'checkbox'
-                                sendData = { this.handleCheckbox }
+                                name = 'discount'
+                                sendData = { this.handleChange }
                                 checked = { this.state.discount }
                             />
                             <span className = 'filters__caption'>Discount</span>

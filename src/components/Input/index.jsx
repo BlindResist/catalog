@@ -8,10 +8,10 @@ class Input extends Component {
         super(props)
         this.state = {
             errorStatus: false,
-            name: this.props.name,
             errorText: 'required field!',
             value: this.props.value || '',
             search: this.props.search || false,
+            name: this.props.name,
             placeholder: this.props.placeholder || 'Input text'
         }
     }
@@ -46,13 +46,11 @@ class Input extends Component {
     }
 
     update = (value = '') => {
-        let dataObject = {
+        this.setState({ value })
+        this.props.sendData({
             value: value,
             name: this.state.name
-        }
-
-        this.setState(dataObject)
-        this.props.sendData(dataObject)
+        })
     }
 
     render() {
@@ -65,8 +63,8 @@ class Input extends Component {
                     maxLength = '255'
                     autoComplete = 'off'
                     id = { this.state.name }
-                    name = { this.state.name }
                     type = { this.props.type }
+                    name = { this.state.name }
                     value = { this.state.value }
                     onChange = { this.changeValue }
                 />

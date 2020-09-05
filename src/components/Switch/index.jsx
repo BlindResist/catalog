@@ -19,13 +19,13 @@ class Switch extends Component {
     }
 
     toggleSwitch = event => {
-        let dataObject = {
-            name: this.state.name,
+        this.setState({
             checked: event.target.checked
-        }
-
-        this.setState(dataObject)
-        this.props.sendData(dataObject)
+        })
+        this.props.sendData({
+            name: this.state.name,
+            value: event.target.checked
+        })
     }
 
     render() {

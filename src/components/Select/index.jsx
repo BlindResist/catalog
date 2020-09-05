@@ -8,11 +8,11 @@ class Select extends Component {
         super(props)
         this.select = React.createRef()
         this.state = {
-            id: '',
             opened: false,
             name: this.props.name,
             options: this.props.options,
-            value: this.props.value || '',
+            selectedOptionId: this.props.selectedOptionId,
+            selectedOptionName: this.props.selectedOptionName || '',
             placeholder: this.props.placeholder || 'Choose option'
         }
     }
@@ -22,15 +22,17 @@ class Select extends Component {
     }
 
     componentDidUpdate = prevProps => {
-        if (this.props.id !== prevProps.id) {
-            this.setState({ id: this.props.id })
+        if (this.props.selectedOptionId === prevProps.selectedOptionId) return
+        if (this.props.selectedOptionId.length < 1) {
+            this.setState({ selectedOptionName: '' })
         }
+        this.setState({ selectedOptionId: this.props.selectedOptionId })
     }
 
     buildOptionClass = option => {
         let className = 'select__option'
 
-        if (option.id === this.state.id) {
+        if (option.id === this.state.selectedOptionId) {
             className += ' is-selected'
         } else if (option.disabled) {
             className += ' is-disabled'
@@ -50,9 +52,8 @@ class Select extends Component {
     selectOption = data => () => {
         this.closeDropdown()
         this.update({
-            id: data.id,
-            value: data.name,
-            name: this.state.name
+            selectedOptionId: data.id,
+            selectedOptionName: data.name
         })
     }
 
@@ -60,9 +61,8 @@ class Select extends Component {
         event.stopPropagation()
         this.closeDropdown()
         this.update({
-            id: '',
-            value: '',
-            name: this.state.name
+            selectedOptionId: '',
+            selectedOptionName: '',
         })
     }
 
@@ -74,7 +74,10 @@ class Select extends Component {
 
     update = object => {
         this.setState(object)
-        this.props.sendData(object)
+        this.props.sendData({
+            name: this.state.name,
+            value: object.selectedOptionId
+        })
     }
 
     options = () => {
@@ -101,15 +104,15 @@ class Select extends Component {
                     onClick = { this.toggleDropdown }
                 >
                     {
-                        this.state.value.length > 0 &&
-                        <span className = 'select__selected'>{ this.state.value }</span>
+                        this.state.selectedOptionName.length > 0 &&
+                        <span className = 'select__selected'>{ this.state.selectedOptionName }</span>
                     }
                     {
-                        this.state.value.length < 1 &&
+                        this.state.selectedOptionName.length < 1 &&
                         <span className = 'select__placeholder'>{ this.state.placeholder }</span>
                     }
                     {
-                        this.state.value.length > 0 &&
+                        this.state.selectedOptionName.length > 0 &&
                         <span
                             className = 'select__clear'
                             onClick = { this.clearSelected }

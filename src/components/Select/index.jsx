@@ -30,7 +30,7 @@ class Select extends Component {
     buildOptionClass = option => {
         let className = 'select__option'
 
-        if (option.id === this.state.selectedOptionId) {
+        if (option.selected === true) {
             className += ' is-selected'
         } else if (option.disabled) {
             className += ' is-disabled'
@@ -47,11 +47,26 @@ class Select extends Component {
         this.setState({ opened: false })
     }
 
+    toggleOptions = id => {
+        let options = this.state.options
+
+        for (let i = 0; i < options.length; i++) {
+            if (options[i].id === id) {
+                options[i].selected = true
+            } else {
+                options[i].selected = false
+            }
+        }
+
+        return options
+    }
+
     selectOption = data => () => {
         this.closeDropdown()
         this.update({
             selectedOptionId: data.id,
-            selectedOptionName: data.name
+            selectedOptionName: data.name,
+            options: this.toggleOptions(data.id)
         })
     }
 
@@ -61,6 +76,7 @@ class Select extends Component {
         this.update({
             selectedOptionId: '',
             selectedOptionName: '',
+            options: this.toggleOptions('')
         })
     }
 

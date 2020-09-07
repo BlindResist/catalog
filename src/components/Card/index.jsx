@@ -34,9 +34,7 @@ class Card extends Component {
                 <div className = 'card__price'>
                     <span>Price:</span>
                     <span className = 'card__price-value'>
-                        {
-                            parseInt(data.priceValue).toLocaleString()
-                        }
+                        { parseInt(data.priceValue).toLocaleString() }
                     </span>
                     <span className = {
                         'card__price-value card__price-value--' + data.priceCurrency

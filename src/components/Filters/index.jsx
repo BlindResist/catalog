@@ -32,9 +32,9 @@ class Filters extends Component {
         this.update({
             name: '',
             brand: '',
+            promo: '',
             country: '',
-            promo: false,
-            discount: false
+            discount: ''
         })
     }
 

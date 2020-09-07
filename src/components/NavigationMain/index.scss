@@ -1,10 +1,9 @@
 .navigation {
     width: 100%;
     width: 4rem;
-    overflow: hidden;
     margin: 3rem 0;
     border-radius: 3rem;
-    box-shadow: $neo-base;
+    box-shadow: $neo-small;
 
     &__item {
         user-select: none;
@@ -32,10 +31,6 @@
 
         &--form {
             background-image: url('../../images/form.svg');
-        }
-
-        &:hover {
-            background-color: rgba($white, .3);
         }
     }
 }

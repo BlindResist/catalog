@@ -10,21 +10,25 @@ class Select extends Component {
         this.state = {
             opened: false,
             name: this.props.name,
+            selectedName: '',
             options: this.props.options,
-            selectedOptionId: this.props.selectedOptionId || '',
-            selectedOptionName: this.props.selectedOptionName || '',
+            selectedId: this.props.selectedId || '',
             placeholder: this.props.placeholder || 'Choose option'
         }
     }
 
     componentDidMount = () => {
+        this.setSelectedOption()
         document.addEventListener('click', event => this.clickOutside(event))
     }
 
     componentDidUpdate = prevProps => {
-        if (this.props.selectedOptionId === prevProps.selectedOptionId) return
-        if (this.props.selectedOptionId.length < 1) this.setState({ selectedOptionName: '' })
-        this.setState({ selectedOptionId: this.props.selectedOptionId })
+        if (this.props.selectedId === prevProps.selectedId) return
+        if (this.props.selectedId.length < 1) this.setState({ selectedName: '' })
+        this.toggleOptions(this.props.selectedId)
+        this.setState({
+            selectedId: this.props.selectedId
+        })
     }
 
     buildOptionClass = option => {
@@ -43,8 +47,27 @@ class Select extends Component {
         this.setState({ opened: !this.state.opened })
     }
 
-    closeDropdown = () => {
+    closeDropdown = state => {
         this.setState({ opened: false })
+    }
+
+    clickOutside = event => {
+        let condition = this.state.opened && !this.select.current.contains(event.target)
+
+        if (condition) this.closeDropdown()
+    }
+
+    setSelectedOption = () => {
+        let options = this.state.options
+
+        for (let i = 0; i < options.length; i++) {
+            if (options[i].selected === this.state.selectedId) {
+                this.setState({
+                    selectedId: options[i].id,
+                    selectedName: options[i].name
+                })
+            }
+        }
     }
 
     toggleOptions = id => {
@@ -64,8 +87,8 @@ class Select extends Component {
     selectOption = data => () => {
         this.closeDropdown()
         this.update({
-            selectedOptionId: data.id,
-            selectedOptionName: data.name,
+            selectedId: data.id,
+            selectedName: data.name,
             options: this.toggleOptions(data.id)
         })
     }
@@ -74,23 +97,17 @@ class Select extends Component {
         event.stopPropagation()
         this.closeDropdown()
         this.update({
-            selectedOptionId: '',
-            selectedOptionName: '',
+            selectedId: '',
+            selectedName: '',
             options: this.toggleOptions('')
         })
-    }
-
-    clickOutside = event => {
-        let condition = this.state.opened && !this.select.current.contains(event.target)
-
-        if (condition) this.closeDropdown()
     }
 
     update = object => {
         this.setState(object)
         this.props.sendData({
             name: this.state.name,
-            value: object.selectedOptionId
+            value: object.selectedId
         })
     }
 
@@ -118,15 +135,15 @@ class Select extends Component {
                     onClick = { this.toggleDropdown }
                 >
                     {
-                        this.state.selectedOptionName.length > 0 &&
-                        <span className = 'select__selected'>{ this.state.selectedOptionName }</span>
+                        this.state.selectedName.length > 0 &&
+                        <span className = 'select__selected'>{ this.state.selectedName }</span>
                     }
                     {
-                        this.state.selectedOptionName.length < 1 &&
+                        this.state.selectedName.length < 1 &&
                         <span className = 'select__placeholder'>{ this.state.placeholder }</span>
                     }
                     {
-                        this.state.selectedOptionName.length > 0 &&
+                        this.state.selectedName.length > 0 &&
                         <span
                             className = 'select__clear'
                             onClick = { this.clearSelected }

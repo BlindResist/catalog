@@ -14,7 +14,7 @@ class Goods extends Component {
     constructor(props) {
         super(props)
         this.params = {
-            name: '',
+            q: '',
             brand: '',
             promo: '',
             country: '',

@@ -7,15 +7,17 @@ const App = {
             copyright: '2020 All rights reserved :p'
         },
         navigationMain: [{
-                id: '0',
-                name: 'I',
+                id: 0,
+                name: '',
                 link: '/',
+                icon: 'food-basket',
                 title: 'Items list'
             },
             {
-                id: '1',
-                name: 'F',
+                id: 1,
+                name: '',
                 link: '/',
+                icon: 'form',
                 title: 'Form'
             }
         ],
@@ -111,7 +113,13 @@ const App = {
                         }
                     ]
                 }
-            }
+            },
+            sorting: [
+                {
+                    name: 'price',
+                    value: 'priceValue'
+                }
+            ]
         }
     }
 }

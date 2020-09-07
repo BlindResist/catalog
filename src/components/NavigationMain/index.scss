@@ -21,7 +21,18 @@
         font-weight: 700;
         text-align: center;
         color: $middle-grey;
+        background-size: 40%;
+        background-position: center;
+        background-repeat: no-repeat;
         transition: background-color $duration-base;
+
+        &--food-basket {
+            background-image: url('../../images/food-basket.svg');
+        }
+
+        &--form {
+            background-image: url('../../images/form.svg');
+        }
 
         &:hover {
             background-color: rgba($white, .3);

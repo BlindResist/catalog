@@ -22,7 +22,10 @@ export default class App extends Component {
                     className = 'main'
                 >
                     <div className = 'content'>
-                        <Goods filters = { data.components.goods.filters } />
+                        <Goods
+                            sorting = { data.components.goods.sorting }
+                            filters = { data.components.goods.filters }
+                        />
                     </div>
                 </main>
             </>

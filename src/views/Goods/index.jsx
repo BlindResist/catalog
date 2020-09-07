@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import Card from '@/components/Card/index.jsx'
 import List from '@/components/List/index.jsx'
+import Sorting from '@/components/Sorting/index.jsx'
 import Filters from '@/components/Filters/index.jsx'
 import NotFound from '@/components/NotFound/index.jsx'
 import ToggleView from '@/components/ToggleView/index.jsx'
 
+import request from '@/utils/request'
 import queryString from '@/utils/queryString'
-import { fetch as fetchPolyfill } from 'whatwg-fetch'
+import clearEmptyParams from '@/utils/clearEmptyParams'
 
 const qs = require('query-string')
 
@@ -18,12 +20,15 @@ class Goods extends Component {
             brand: '',
             promo: '',
             country: '',
-            discount: ''
+            discount: '',
+            _sort: '',
+            _order: ''
         }
         this.state = {
             items: [],
             loaded: false,
             itemsInRow: 2,
+            sorting: this.props.sorting,
             filters: this.props.filters,
             url: 'http://localhost:3000/goods'
         }
@@ -34,45 +39,28 @@ class Goods extends Component {
     }
 
     getData = () => {
-        let searchParams = qs.stringify(this.clearEmptyParams())
+        let searchParams = qs.stringify(clearEmptyParams(this.params))
         let searchRequest = `${this.state.url}?${searchParams}`
 
-        fetch(searchRequest)
-            .then(response => {
-                if (response.status >= 200 && response.status < 300) {
-                    return response
-                } else {
-                    let error = new Error(response.statusText)
-                    error.response = response
-                    throw error
-                }
+        request(searchRequest, this.params, data => {
+            queryString(this.params)
+            this.setState({
+                loaded: true,
+                items: data
             })
-            .then(response => response.json())
-            .then(data => {
-                queryString(this.params)
-                this.setState({
-                    loaded: true,
-                    items: data
-                })
-            }).catch(error => {
-                console.log(error)
-            })
-    }
-
-    clearEmptyParams = () => {
-        let params = Object.assign({}, this.params)
-
-        for (let key in params) {
-            if (params[key] === '' || params[key] === false) delete params[key]
-        }
-
-        return params
+        })
     }
 
     handleChange = params => {
         for (let key in params) {
             this.params[key] = params[key]
         }
+        this.getData()
+    }
+
+    handleSort = ({sort, order}) => {
+        this.params._sort = sort
+        this.params._order = order
         this.getData()
     }
 
@@ -99,8 +87,14 @@ class Goods extends Component {
                 <div className = 'row'>
                     <div className = 'col-default-8'>
                         <div className = 'row'>
-                            <div className = 'col-default-12'>
+                            <div className = 'col-default-6'>
                                 <ToggleView sendData = { this.changeView }/>
+                            </div>
+                            <div className = 'col-default-6'>
+                                <Sorting
+                                    onSort = { this.handleSort }
+                                    types = { this.state.sorting }
+                                />
                             </div>
                         </div>
                         {

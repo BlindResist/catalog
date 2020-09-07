@@ -1,0 +1,32 @@
+.sorting {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+    user-select: none;
+
+    &__caption {
+        margin-right: .5rem;
+    }
+
+    &__button {
+        cursor: pointer;
+
+        &.asc:after {
+            content: '\2191'
+        }
+
+        &.desc:after {
+            content: '\2193'
+        }
+
+        &.asc,
+        &.desc {
+
+            &:after {
+                color: $red;
+            }
+        }
+
+    }
+}

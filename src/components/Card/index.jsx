@@ -30,6 +30,10 @@ class Card extends Component {
                         title = { data.name }
                     >{ data.name }</Link>
                     <p className = 'card__desc'>{ data.desc }</p>
+                    {
+                        data.countryName &&
+                        <p className = 'card__desc'>Country: { data.countryName }</p>
+                    }
                 </div>
                 <div className = 'card__price'>
                     <span>Price:</span>

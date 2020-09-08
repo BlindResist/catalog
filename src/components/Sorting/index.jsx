@@ -5,38 +5,41 @@ import Link from '@/components/Link/index.jsx'
 import './index.scss'
 
 class Sorting extends Component {
-
     constructor(props) {
         super(props)
         this.state = {
-            direction: 'asc',
+            currentSort: '',
+            sortDirection: 'asc',
             types: this.props.types
         }
     }
 
     handleClick = (event, value) => {
-        this.toggleClass(event.target)
-        this.toggleDirection()
+        this.setState({
+            currentSort: value,
+            sortDirection: (this.state.sortDirection === 'asc') ? 'desc' : 'asc'
+        })
         this.props.onSort({
             sort: value,
-            order: this.state.direction
+            order: this.state.sortDirection
         })
+        this.toggleClass(event.target)
     }
 
     toggleClass = element => {
-        if (element.classList.contains('asc')) {
-            element.classList.add('desc')
-            element.classList.remove('asc')
-        } else {
-            element.classList.add('asc')
-            element.classList.remove('desc')
+        for (let key in this.refs) {
+            if (this.refs[key] == element) {
+                if (element.classList.contains('asc')) {
+                    element.classList.add('desc')
+                    element.classList.remove('asc')
+                } else {
+                    element.classList.add('asc')
+                    element.classList.remove('desc')
+                }
+            } else {
+                this.refs[key].classList.remove('asc', 'desc')
+            }
         }
-    }
-
-    toggleDirection = () => {
-        this.setState({
-            direction: (this.state.direction === 'asc') ? 'desc' : 'asc'
-        })
     }
 
     types = () => {
@@ -44,6 +47,7 @@ class Sorting extends Component {
             return (
                 <span
                     key = { index }
+                    ref = { item.value }
                     className = 'sorting__button'
                     onClick = { (event => this.handleClick(event, item.value)) }
                 >{ item.name }</span>

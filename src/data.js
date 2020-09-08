@@ -118,6 +118,10 @@ const App = {
                 {
                     name: 'price',
                     value: 'priceValue'
+                },
+                {
+                    name: 'discount',
+                    value: 'discountSize'
                 }
             ]
         }

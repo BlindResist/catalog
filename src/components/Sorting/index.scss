@@ -5,11 +5,9 @@
     height: 100%;
     user-select: none;
 
-    &__caption {
-        margin-right: .5rem;
-    }
-
     &__button {
+        margin-left: .5rem;
+        border-bottom: 1px dotted $middle-grey;
         cursor: pointer;
 
         &.asc:after {
@@ -22,6 +20,7 @@
 
         &.asc,
         &.desc {
+            border-bottom-color: transparent;
 
             &:after {
                 color: $red;

@@ -122,6 +122,10 @@ const App = {
                 {
                     name: 'discount',
                     value: 'discountSize'
+                },
+                {
+                    name: 'rating',
+                    value: 'rating'
                 }
             ]
         }

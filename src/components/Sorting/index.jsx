@@ -23,22 +23,26 @@ class Sorting extends Component {
             sort: value,
             order: this.state.sortDirection
         })
-        this.toggleClass(event.target)
+        this.toggleActiveSort(event.target)
     }
 
-    toggleClass = element => {
+    toggleActiveSort = element => {
         for (let key in this.refs) {
             if (this.refs[key] == element) {
-                if (element.classList.contains('asc')) {
-                    element.classList.add('desc')
-                    element.classList.remove('asc')
-                } else {
-                    element.classList.add('asc')
-                    element.classList.remove('desc')
-                }
+                this.toggleClass(element)
             } else {
                 this.refs[key].classList.remove('asc', 'desc')
             }
+        }
+    }
+
+    toggleClass = element => {
+        if (element.classList.contains('asc')) {
+            element.classList.add('desc')
+            element.classList.remove('asc')
+        } else {
+            element.classList.add('asc')
+            element.classList.remove('desc')
         }
     }
 

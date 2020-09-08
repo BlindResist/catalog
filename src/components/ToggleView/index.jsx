@@ -24,15 +24,17 @@ class ToggleView extends Component {
         return (
             <div className = 'toggle-view'>
                 <Button
+                    text = '&#9783;'
                     onClick = { this.handleClick(false) }
                     addClass = {
-                        'button--toggle button--toggle-tile' + (!this.state.listView ? ' is-active' : '')
+                        'button--toggle' + (!this.state.listView ? ' is-active' : '')
                     }
                 />
                 <Button
+                    text = '&#9776;'
                     onClick = { this.handleClick(true) }
                     addClass = {
-                        'button--toggle button--toggle-list' + (this.state.listView ? ' is-active' : '')
+                        'button--toggle' + (this.state.listView ? ' is-active' : '')
                     }
                 />
             </div>

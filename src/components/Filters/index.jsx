@@ -13,10 +13,8 @@ class Filters extends Component {
         this.state = {
             brand: '',
             country: '',
-            brandName: '',
-            countryName: '',
             filters: this.props.filters,
-            name: this.props.filters.name.value,
+            q: this.props.filters.name.value,
             promo: this.props.filters.promo.checked,
             discount: this.props.filters.discount.checked
         }
@@ -30,11 +28,11 @@ class Filters extends Component {
 
     handleClear = () => {
         this.update({
-            name: '',
+            q: '',
             brand: '',
+            promo: '',
             country: '',
-            promo: false,
-            discount: false
+            discount: ''
         })
     }
 
@@ -50,9 +48,9 @@ class Filters extends Component {
                     <div className = 'col-default-12'>
                         <Input
                             search
+                            name = 'q'
                             type = 'text'
-                            name = 'name'
-                            value = { this.state.name }
+                            value = { this.state.q }
                             sendData = { this.handleChange }
                             placeholder = { this.state.filters.name.placeholder }
                         />
@@ -61,8 +59,7 @@ class Filters extends Component {
                         <Select
                             name = 'brand'
                             sendData = { this.handleChange }
-                            selectedOptionId = { this.state.brand }
-                            selectedOptionName = { this.state.brandName }
+                            selectedId = { this.state.brand }
                             options = { this.state.filters.brand.options }
                             placeholder = { this.state.filters.brand.placeholder }
                         />
@@ -71,8 +68,7 @@ class Filters extends Component {
                         <Select
                             name = 'country'
                             sendData = { this.handleChange }
-                            selectedOptionId = { this.state.country }
-                            selectedOptionName = { this.state.countryName }
+                            selectedId = { this.state.country }
                             options = { this.state.filters.country.options }
                             placeholder = { this.state.filters.country.placeholder }
                         />

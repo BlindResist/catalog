@@ -17,7 +17,7 @@ class NavigationMain extends Component {
                         link = { item.link }
                         name = { item.name }
                         title = { item.title }
-                        class = 'navigation__link'
+                        class = { 'navigation__link navigation__link--' + item.icon }
                     />
                 </li>
             )

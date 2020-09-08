@@ -1,10 +1,9 @@
 .navigation {
     width: 100%;
     width: 4rem;
-    overflow: hidden;
     margin: 3rem 0;
     border-radius: 3rem;
-    box-shadow: $neo-base;
+    box-shadow: $neo-small;
 
     &__item {
         user-select: none;
@@ -21,10 +20,17 @@
         font-weight: 700;
         text-align: center;
         color: $middle-grey;
+        background-size: 40%;
+        background-position: center;
+        background-repeat: no-repeat;
         transition: background-color $duration-base;
 
-        &:hover {
-            background-color: rgba($white, .3);
+        &--food-basket {
+            background-image: url('../../images/food-basket.svg');
+        }
+
+        &--form {
+            background-image: url('../../images/form.svg');
         }
     }
 }

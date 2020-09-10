@@ -15,8 +15,9 @@ class ToggleView extends Component {
     handleClick = state => () => {
         this.setState({
             listView: state
+        }, () => {
+            this.props.sendData(state ? 1 : 2)
         })
-        this.props.sendData(state ? 1 : 2)
     }
 
     render() {

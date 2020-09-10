@@ -37,8 +37,9 @@ class Filters extends Component {
     }
 
     update = object => {
-        this.setState(object)
-        this.props.onFilter(object)
+        this.setState(object, () => {
+            this.props.onFilter(object)
+        })
     }
 
 	render() {

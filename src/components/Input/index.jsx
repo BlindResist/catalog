@@ -46,10 +46,11 @@ class Input extends Component {
     }
 
     update = (value = '') => {
-        this.setState({ value })
-        this.props.sendData({
-            value: value,
-            name: this.state.name
+        this.setState({ value }, () => {
+            this.props.sendData({
+                value: value,
+                name: this.state.name
+            })
         })
     }
 

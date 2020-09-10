@@ -104,10 +104,11 @@ class Select extends Component {
     }
 
     update = object => {
-        this.setState(object)
-        this.props.sendData({
-            name: this.state.name,
-            value: object.selectedId
+        this.setState(object, () => {
+            this.props.sendData({
+                name: this.state.name,
+                value: object.selectedId
+            })
         })
     }
 

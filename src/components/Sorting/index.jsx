@@ -15,15 +15,16 @@ class Sorting extends Component {
     }
 
     handleClick = (event, value) => {
+        this.toggleActiveSort(event.target)
         this.setState({
             currentSort: value,
             sortDirection: (this.state.sortDirection === 'asc') ? 'desc' : 'asc'
+        }, () => {
+            this.props.onSort({
+                sort: value,
+                order: this.state.sortDirection
+            })
         })
-        this.props.onSort({
-            sort: value,
-            order: this.state.sortDirection
-        })
-        this.toggleActiveSort(event.target)
     }
 
     toggleActiveSort = element => {

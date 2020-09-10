@@ -14,12 +14,12 @@ class Aside extends Component {
                 <Header
                     data = { this.props.header }
                 />
-                <NavigationMain
+                {/*<NavigationMain
                     items = { this.props.navigation }
-                />
-                <Footer
+                />*/}
+                {/*<Footer
                     data = { this.props.footer }
-                />
+                />*/}
             </aside>
         )
     }

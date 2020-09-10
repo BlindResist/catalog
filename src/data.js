@@ -1,7 +1,9 @@
 const App = {
     components: {
         header: {
-            caption: 'React simple page'
+            target: '_blank',
+            caption: 'Project owner & creator',
+            link: 'https://blindresist.github.io/'
         },
         footer: {
             copyright: '2020 All rights reserved :p'

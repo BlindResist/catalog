@@ -76,6 +76,7 @@ class Goods extends Component {
                 <Card
                     data = { item }
                     key = { item.id }
+                    isSingle = { this.state.itemsInRow === 1 }
                 />
             )
         })

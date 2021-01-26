@@ -24,6 +24,7 @@ const App = {
             }
         ],
         goods: {
+            url: 'http://localhost:3000/goods',
             filters: {
                 name: {
                     value: '',

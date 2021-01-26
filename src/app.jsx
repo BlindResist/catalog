@@ -23,6 +23,7 @@ export default class App extends Component {
                 >
                     <div className = 'content'>
                         <Goods
+                            url = { data.components.goods.url }
                             sorting = { data.components.goods.sorting }
                             filters = { data.components.goods.filters }
                         />

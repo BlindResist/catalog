@@ -28,9 +28,9 @@ class Goods extends Component {
             items: [],
             loaded: false,
             itemsInRow: 2,
+            url: this.props.url,
             sorting: this.props.sorting,
-            filters: this.props.filters,
-            url: 'http://localhost:3000/goods'
+            filters: this.props.filters
         }
     }
 

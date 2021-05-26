@@ -1,12 +1,12 @@
-# Firing Field #
+# React catalog #
 
-Пмимо сборки на Webpack, на проекте используется fake REST API [json-server](https://github.com/typicode/json-server)  
+Project uses the fake REST API [json-server](https://github.com/typicode/json-server)  
 
-Установка:
+Install:
 ```
 npm install -g json-server
 ```
-После установки, запустить сервер из коренной директории проекта:
+After installation, run the server from the project root:
 ```
 json-server --watch db.json
 ```
